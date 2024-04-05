@@ -14,12 +14,12 @@ We also plan to support upload workflow to customize your app in the future.
 ## Roadmap
 
 - [x] Base Text to image
-- [] Select model
-- [] Select styles
-- [] Text to video
-- [] Image to video
-- [] Video to video
-- [] Customize App
+- [ ] Select model
+- [ ] Select styles
+- [ ] Text to video
+- [ ] Image to video
+- [ ] Video to video
+- [ ] Customize App
 
 # Install
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
