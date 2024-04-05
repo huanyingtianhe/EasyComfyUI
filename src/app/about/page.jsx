@@ -14,9 +14,9 @@ const About = () => {
           className={styles.img}
         />
         <div className={styles.imgText}>
-          <h1 className={styles.imgTitle}>Digital Storytellers</h1>
+          <h1 className={styles.imgTitle}>EasyComfyUI</h1>
           <h2 className={styles.imgDesc}>
-            Handcrafting award winning digital experiences
+            We Simplify ComfyUI usage
           </h2>
         </div>
       </div>
@@ -24,34 +24,25 @@ const About = () => {
         <div className={styles.item}>
           <h1 className={styles.title}>Who Are We?</h1>
           <p className={styles.desc}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus
-            quae dolor, optio voluptatibus magnam iure esse tempora beatae. A
-            suscipit eos. Animi quibusdam cum omnis officiis voluptatum quo ea
-            eveniet? Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Ducimus quae dolor, optio voluptatibus magnam iure esse tempora
-            beatae, a suscipit eos. Animi quibusdam cum omnis officiis
+            We are a dynamic team of developers and designers passionate about creating user-friendly interfaces. Our mission is to make software interactions comfortable and efficient for users.
             <br />
             <br />
-            voluptatum quo ea eveniet? Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Ducimus quae dolor, optio voluptatibus magnam iure
-            esse tempora beatae, a suscipit eos. Animi quibusdam cum omnis
-            officiis voluptatum quo ea eveniet?
+            Our core focus is on enhancing user experience. 
           </p>
         </div>
         <div className={styles.item}>
           <h1 className={styles.title}>What We Do?</h1>
           <p className={styles.desc}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus
-            quae dolor, optio voluptatibus magnam iure esse tempora beatae, a
-            suscipit eos. Animi quibusdam cum omnis officiis voluptatum quo ea
-            eveniet? Lorem ipsum dolor sit amet consectetur adipisicing elit. -
-            Creative Illustrations
+            ComfyUI is the most powerful and modular stable diffusion GUI and backend. But it is not easy to use it. We build Apps 
+            based on the workflow, and it provide several interfaces, like input prompt, upload image, upload video. You do not need 
+            to take care of the workflow details, You can focus on your content without worrying about workflow intricacies. Here is 
+            what we provided
             <br />
-            <br /> - Dynamic Websites
+            <br /> - Text to Image, Text to Video
             <br />
-            <br /> - Fast and Handy
+            <br /> - Image to Image, Image to video
             <br />
-            <br /> - Mobile Apps
+            <br /> - Video to video
           </p>
           <Button url="/contact" text="Contact" />
         </div>

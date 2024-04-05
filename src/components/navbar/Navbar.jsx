@@ -19,8 +19,8 @@ const links = [
   },
   {
     id: 3,
-    title: "Blog",
-    url: "/blog",
+    title: "Apps",
+    url: "/apps",
   },
   {
     id: 4,
@@ -45,7 +45,7 @@ const Navbar = () => {
   return (
     <div className={styles.container}>
       <Link href="/" className={styles.logo}>
-        lamamia
+        EasyComfyUI
       </Link>
       <div className={styles.links}>
         <DarkModeToggle />
