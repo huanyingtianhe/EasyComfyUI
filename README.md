@@ -1,3 +1,17 @@
+# Introduction
+
+ComfyUI is the most powerful and modular stable diffusion GUI and backend. But it is not easy to use, and has a high learning curve. We build Apps 
+based on the workflows, and provide several interfaces, like input prompt, upload image, upload video. You do not need 
+to take care of the workflow details, what is your focus is only your content. We plan to 
+provide follow functionalities, but we only support "Text to image" so far:
+
+- Text to Image, Text to Video
+- Image to Image, Image to video
+- Video to video
+
+We also plan to support upload workflow to customize your app in the future.
+
+# Install
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started

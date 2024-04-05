@@ -33,10 +33,9 @@ const About = () => {
         <div className={styles.item}>
           <h1 className={styles.title}>What We Do?</h1>
           <p className={styles.desc}>
-            ComfyUI is the most powerful and modular stable diffusion GUI and backend. But it is not easy to use it. We build Apps 
-            based on the workflow, and it provide several interfaces, like input prompt, upload image, upload video. You do not need 
-            to take care of the workflow details, You can focus on your content without worrying about workflow intricacies. Here is 
-            what we provided
+          ComfyUI is the most powerful and modular stable diffusion GUI and backend. But it is not easy to use, and has a high learning curve. We build Apps 
+          based on the workflows, and provide several interfaces, like input prompt, upload image, upload video. You do not need 
+          to take care of the workflow details, what is your focus is only your content. Here are the Apps we want to provide:
             <br />
             <br /> - Text to Image, Text to Video
             <br />
