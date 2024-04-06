@@ -13,11 +13,13 @@ const handler = NextAuth({
       name: "Credentials",
       async authorize(credentials) {
         //Check if the user exists.
-        await connect();
+        var dbClient = await connect();
 
         try {
-          const user = await User.findOne({
-            email: credentials.email,
+          const user = await dbClient.user.findUnique({
+            where: {
+              email: credentials.email,
+            }
           });
 
           if (user) {

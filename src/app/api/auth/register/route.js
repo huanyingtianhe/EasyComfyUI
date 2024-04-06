@@ -1,27 +1,29 @@
-import User from "@/models/User";
 import connect from "@/utils/db";
 import bcrypt from "bcryptjs";
 import { NextResponse } from "next/server";
 
 export const POST = async (request) => {
   const { name, email, password } = await request.json();
+  console.log(`register, get name: ${name}, email: ${email}, password: ${password}`)
 
-  await connect();
+  const dbClient = await connect();
 
   const hashedPassword = await bcrypt.hash(password, 5);
 
-  const newUser = new User({
-    name,
-    email,
-    password: hashedPassword,
-  });
-
   try {
-    await newUser.save();
+    await dbClient.user.create({
+      data: {
+        name: name,
+        email: email,
+        password: hashedPassword,
+        role: "normal",
+      }
+    })
     return new NextResponse("User has been created", {
       status: 201,
     });
   } catch (err) {
+    console.log("register, got error: ", err)
     return new NextResponse(err.message, {
       status: 500,
     });

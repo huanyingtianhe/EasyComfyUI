@@ -1,8 +1,17 @@
-import mongoose from "mongoose";
+const { PrismaClient } = require('@prisma/client')
+
+var connection  = null;
 
 const connect = async () => {
   try {
-    await mongoose.connect(process.env.MONGO);
+    if (connection) {
+      console.log("use existing db connection")
+      return connection
+    }
+    else {
+      connection = new PrismaClient()
+      return connection;
+    }
   } catch (error) {
     throw new Error("Connection failed!");
   }

@@ -6,11 +6,11 @@ export const GET = async (request, { params }) => {
   const { id } = params;
 
   try {
-    await connect();
+    const dbClient = await connect();
 
-    const post = await Post.findById(id);
+    const app = await dbClient.app.findById(id);
 
-    return new NextResponse(JSON.stringify(post), { status: 200 });
+    return new NextResponse(JSON.stringify(app), { status: 200 });
   } catch (err) {
     return new NextResponse("Database Error", { status: 500 });
   }
@@ -20,9 +20,9 @@ export const DELETE = async (request, { params }) => {
   const { id } = params;
 
   try {
-    await connect();
+    const dbClient = await connect();
 
-    await Post.findByIdAndDelete(id);
+    await dbClient.app.delete(id);
 
     return new NextResponse("Post has been deleted", { status: 200 });
   } catch (err) {

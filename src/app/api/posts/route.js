@@ -8,11 +8,16 @@ export const GET = async (request) => {
   const username = url.searchParams.get("username");
 
   try {
-    await connect();
+    const dbClient = await connect();
 
-    const posts = await Post.find(username && { username });
+    const apps = await dbClient.app.findMany({
+      include:{
+        user: true
+      },
+    });
 
-    return new NextResponse(JSON.stringify(posts), { status: 200 });
+    console.log("Got apps number: ", apps.length)
+    return new NextResponse(JSON.stringify(apps), { status: 200 });
   } catch (err) {
     return new NextResponse("Database Error", { status: 500 });
   }

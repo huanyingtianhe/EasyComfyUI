@@ -30,6 +30,7 @@ const Login = ({ url }) => {
     const email = e.target[0].value;
     const password = e.target[1].value;
 
+    console.log(`got email: ${email}, password: {password}`)
     signIn("credentials", {
       email,
       password,
@@ -65,18 +66,18 @@ const Login = ({ url }) => {
       >
         Login with Google
       </button>
-      <span className={styles.or}>- OR -</span>
-      <Link className={styles.link} href="/dashboard/register">
-        Create new account
-      </Link>
-      {/* <button
+      <button
         onClick={() => {
           signIn("github");
         }}
         className={styles.button + " " + styles.github}
       >
         Login with Github
-      </button> */}
+      </button>
+      <span className={styles.or}>- OR -</span>
+      <Link className={styles.link} href="/dashboard/register">
+        Create new account
+      </Link>
     </div>
   );
 };

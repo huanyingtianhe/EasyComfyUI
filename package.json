@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@prisma/client": "^5.12.1",
     "bcryptjs": "^2.4.3",
     "eslint": "8.41.0",
     "eslint-config-next": "14.0.4",
@@ -19,5 +20,8 @@
     "react-dom": "^18.2.0",
     "swr": "2.1.5",
     "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "prisma": "^5.12.1"
   }
 }
