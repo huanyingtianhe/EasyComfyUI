@@ -58,7 +58,7 @@ const Dashboard = () => {
     const title = e.target[0].value;
     const desc = e.target[1].value;
     const img = e.target[2].value;
-    const content = e.target[3].value;
+    const workflow = e.target[3].value;
 
     try {
       await fetch("/api/posts", {
@@ -67,7 +67,7 @@ const Dashboard = () => {
           title,
           desc,
           img,
-          content,
+          content: workflow,
           username: session.data.user.name,
         }),
       });
@@ -114,7 +114,7 @@ const Dashboard = () => {
           <h1>Add New App</h1>
           <input type="text" placeholder="Title" className={styles.input} />
           <input type="text" placeholder="Desc" className={styles.input} />
-          <input type="image" placeholder="Image" className={styles.input} />
+          <input type="text" placeholder="Image Url" className={styles.input} />
           <textarea
             placeholder="Workflow"
             className={styles.textArea}
