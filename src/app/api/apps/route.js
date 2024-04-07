@@ -1,12 +1,9 @@
 import { NextResponse } from "next/server";
 import connect from "@/utils/db";
-import Post from "@/models/Post";
 
 export const GET = async (request) => {
   const url = new URL(request.url);
-
-  const username = url.searchParams.get("username");
-
+  
   try {
     const dbClient = await connect();
 
@@ -25,16 +22,33 @@ export const GET = async (request) => {
 
 export const POST = async (request) => {
   const body = await request.json();
-
-  const newPost = new Post(body);
+  console.log("add new app: ", body)
 
   try {
-    await connect();
+    const dbClient = await connect();
 
-    await newPost.save();
+    await dbClient.app.create(
+      {
+        data: {
+          img: body.img,
+          title: body.title,
+          desc: body.desc,
+          workflow: body.workflow,
+          user: {
+            connect: {
+              email: body.email
+            },
+          },
+        },
+        include: {
+          user: true,
+        },
+      }
+    )
 
     return new NextResponse("Post has been created", { status: 201 });
   } catch (err) {
+    console.log("Got error when add app: ", err);
     return new NextResponse("Database Error", { status: 500 });
   }
 };

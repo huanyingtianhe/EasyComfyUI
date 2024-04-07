@@ -3,6 +3,7 @@ import styles from "./ImageLoaderForm.module.css";
 import Image from "next/image";
 import ImageLoaderForm from "@/components/ImageLoader/ImageLoaderForm"
 import Loading from "/public/loading.png";
+import Avatar from "/public/avatar.jpg"
 
 export default function ImageGenerator({data, client_id}) {
     console.log(`Start to generate image, data: ${data.img} client_id: ${client_id}`)
@@ -63,13 +64,13 @@ export default function ImageGenerator({data, client_id}) {
                     <h1 className={styles.title}>{data.title}</h1>
                     <div className={styles.author}>
                         <Image
-                            src={data.avatar}
+                            src={data.user.avatar ? data.user.avatar : Avatar }
                             alt=""
                             width={40}
                             height={40}
                             className={styles.avatar}
                         />
-                        <span className={styles.username}>{data.username}</span>
+                        <span className={styles.username}>{data.user.name}</span>
                     </div>
                 </div>
             </div>

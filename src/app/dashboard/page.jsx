@@ -41,7 +41,7 @@ const Dashboard = () => {
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
   const { data, mutate, error, isLoading } = useSWR(
-    `/api/posts?username=${session?.data?.user.name}`,
+    `/api/apps?username=${session?.data?.user.name}`,
     fetcher
   );
 
@@ -61,14 +61,14 @@ const Dashboard = () => {
     const workflow = e.target[3].value;
 
     try {
-      await fetch("/api/posts", {
+      await fetch("/api/apps", {
         method: "POST",
         body: JSON.stringify({
           title,
           desc,
           img,
-          content: workflow,
-          username: session.data.user.name,
+          workflow: workflow,
+          email: session.data.user.email,
         }),
       });
       mutate();
@@ -80,7 +80,7 @@ const Dashboard = () => {
 
   const handleDelete = async (id) => {
     try {
-      await fetch(`/api/posts/${id}`, {
+      await fetch(`/api/apps/${id}`, {
         method: "DELETE",
       });
       mutate();

@@ -32,6 +32,6 @@ model App {
   title     String
   desc      String
   user      User     @relation(fields: [authorId], references: [id])
-  workflow  String
+  workflow  Json
   authorId  Int
 }

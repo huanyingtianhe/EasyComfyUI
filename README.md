@@ -27,8 +27,8 @@ We also plan to support upload workflow to customize your app in the future.
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
-
-First, run the development server:
+First, Install Mysql in your env, create a database for the project, copy the mysql connection string to DATABASE_URL in .env file.
+Then, run the development server:
 
 ```bash
 npm run dev
@@ -40,9 +40,19 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## How to use prisma
+For development, you only need to run following commands:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```bash
+npm install prisma --save-dev
+npx prisma init
+npx prisma migrate dev --name init
+```
+
+You can find more in the following documents:
+[Getting started](https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases-node-mysql)
+
+[CRUD document](https://www.prisma.io/docs/orm/prisma-client/queries/crud#read)
 
 ## Learn More
 

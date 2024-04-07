@@ -8,10 +8,18 @@ export const GET = async (request, { params }) => {
   try {
     const dbClient = await connect();
 
-    const app = await dbClient.app.findById(id);
+    const app = await dbClient.app.findUnique({
+      where: {
+        id: Number(id),
+      },
+      include:{
+        user: true
+      },
+    });
 
     return new NextResponse(JSON.stringify(app), { status: 200 });
   } catch (err) {
+    console.log("Got app due to error: ", err);
     return new NextResponse("Database Error", { status: 500 });
   }
 };
