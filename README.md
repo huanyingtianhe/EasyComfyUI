@@ -40,8 +40,8 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## How to use prisma
-For development, you only need to run following commands:
+## How to use Prisma
+Prisma ORM is an open-source next-generation ORM. For development, you only need to run following commands, it will create tables and keys in your database.
 
 ```bash
 npm install prisma --save-dev
@@ -50,6 +50,7 @@ npx prisma migrate dev --name init
 ```
 
 You can find more in the following documents:
+
 [Getting started](https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases-node-mysql)
 
 [CRUD document](https://www.prisma.io/docs/orm/prisma-client/queries/crud#read)
