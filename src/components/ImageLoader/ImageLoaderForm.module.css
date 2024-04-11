@@ -35,15 +35,14 @@
   margin-top: 50px;
   font-size: 20px;
   font-weight: 300;
-  color: #999;
   text-align: justify;
 }
 
 .form {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  width: 80%;
+  align-items: stretch;
+  width: 95%;
 }
 
 .prompt{
@@ -52,18 +51,17 @@
   border: 2px solid #bbb;
   color:#bbb;
   border-radius: 5px;
-  font-size: 20px;
-  font-weight: bold;
-  flex-grow: 10;
+  font-size: 18px;
+  flex-grow: 14;
 }
 
 .generate {
-  padding: 10px;
-  border: 2px solid #070707;
+  border: 2px solid #026aa4;
   border-radius: 5px;
   font-size: 20px;
   font-weight: bold;
-  color: #151414;
+  color: #fbf7f7;
+  background-color: #026aa4;
   flex-grow: 1;
 }
 
