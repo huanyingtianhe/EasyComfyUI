@@ -1,5 +1,11 @@
 "use server"
 
+function UpdateWorkflow(workflow, path, prompt){
+    "use client"
+    const jp = require("jsonpath")
+    jp.apply(workflow, path, function(value) { return prompt });
+}
+
 export const GenerateImag = async(client_id, workflow, formData) => {
 
     console.log("Got client_id: ", client_id)
@@ -11,7 +17,9 @@ export const GenerateImag = async(client_id, workflow, formData) => {
     console.log("Got prompt: ", prompt)
     try{
         // queue prompt
-        workflow["6"]["inputs"]["text"] = prompt;
+        //workflow["6"]["inputs"]["text"] = prompt;
+        UpdateWorkflow(workflow, '$.6.inputs.text', prompt);
+        console.log("new workflow: ", workflow);
         const data = { 'prompt': workflow, 'client_id': client_id };
         console.log("request to url: ", `${process.env.ComfyUI_BASE_ADDRESS}/prompt`)
         const response = await fetch(`${process.env.ComfyUI_BASE_ADDRESS}/prompt`, {

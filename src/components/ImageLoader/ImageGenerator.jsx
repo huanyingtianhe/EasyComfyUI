@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useState, useEffect } from 'react';
 import styles from "./ImageLoaderForm.module.css";
 import Image from "next/image";

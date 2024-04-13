@@ -13,7 +13,8 @@ export const GET = async (request, { params }) => {
         id: Number(id),
       },
       include:{
-        user: true
+        user: true,
+        commands: true,
       },
     });
 

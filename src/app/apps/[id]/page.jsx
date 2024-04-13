@@ -1,5 +1,3 @@
-'use client'
-
 import { v4 as uuidv4 } from 'uuid';
 import ImageGenerator from "@/components/ImageLoader/ImageGenerator"
 

@@ -9,7 +9,7 @@ export const GET = async (request) => {
 
     const apps = await dbClient.app.findMany({
       include:{
-        user: true
+        user: true,
       },
     });
 

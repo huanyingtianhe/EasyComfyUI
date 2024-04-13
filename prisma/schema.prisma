@@ -24,14 +24,24 @@ model User {
   Apps      App[]
 }
 
+model Command {
+  id       Int    @id @default(autoincrement())
+  jsonPath String
+  desc     String
+  type     String
+  App      App?   @relation(fields: [appId], references: [id])
+  appId    Int?
+}
+
 model App {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
   img       String
   title     String
   desc      String
-  user      User     @relation(fields: [authorId], references: [id])
+  user      User      @relation(fields: [authorId], references: [id])
   workflow  Json
   authorId  Int
+  commands  Command[]
 }
