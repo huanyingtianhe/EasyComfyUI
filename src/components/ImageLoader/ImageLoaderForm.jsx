@@ -2,15 +2,15 @@ import React from "react";
 import styles from "./ImageLoaderForm.module.css";
 import {GenerateImag} from "@/utils/action"
 
-const ImageLoaderForm = ({ data, client_id }) => {
+const ImageLoaderForm = ({ data, command, client_id }) => {
     async function onSubmit(event) {
         event.preventDefault()
         const formData = new FormData(event.target)
         const prompt = formData.get("prompt");
         console.log("Get formData on submit: ", prompt);
         const jp = require("jsonpath");
-        console.log("The json path is: ", data.commands[0].jsonPath);
-        jp.apply(data.workflow, data.commands[0].jsonPath, function(value) { return prompt });
+        console.log("The json path is: ", command.jsonPath);
+        jp.apply(data.workflow, command.jsonPath, function(value) { return prompt });
         console.log("Updated workflow:", data.workflow);
         const body = { 'prompt': data.workflow, 'client_id': client_id };
         const response = await fetch('/api/comfyui/prompt',

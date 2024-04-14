@@ -77,10 +77,38 @@ export default function ImageGenerator({data, client_id}) {
                 </div>
             </div>
             <div className={styles.content}>
-                <p className={styles.desc}>
-                    {data.desc}
-                </p>
-                <ImageLoaderForm data={data} client_id={client_id} />
+                {data.commands.map((command) => (
+                    command.type === "text" ? 
+                    (<div>
+                        <p className={styles.desc}>
+                            {command.desc}
+                        </p>
+                        <ImageLoaderForm data={data} command = {command} client_id={client_id} />
+                    </div>) :
+                    (command.type === "image" ?
+                    <div>
+                        <p className={styles.desc}>
+                            {command.desc}
+                        </p>
+                        <input
+                            name = "prompt"
+                            type = "text"
+                            className={styles.prompt}
+                            placeholder="Prompt"
+                        ></input>
+                    </div> :
+                    (<div>
+                        <p className={styles.desc}>
+                            {command.desc}
+                        </p>
+                        <input
+                            name = "prompt"
+                            type = "text"
+                            className={styles.prompt}
+                            placeholder="Prompt"
+                        ></input>
+                    </div>))
+                ))}
             </div>
             <Image
                 src={loading? Loading : srcImage}

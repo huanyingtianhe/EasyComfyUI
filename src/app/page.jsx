@@ -2,6 +2,7 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import Hero from "/public/hero.png";
 import Button from "@/components/Button/Button";
+import MediaUploader from "@/components/ImageLoader/MediaUploader";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
       <div className={styles.item}>
         <Image src={Hero} alt="" className={styles.img} />
       </div>
+      <MediaUploader/>
     </div>
   );
 }
