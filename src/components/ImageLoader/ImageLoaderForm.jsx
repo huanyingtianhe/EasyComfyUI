@@ -10,8 +10,8 @@ const ImageLoaderForm = ({ data, command, client_id }) => {
         console.log("Get formData on submit: ", prompt);
         const jp = require("jsonpath");
         console.log("The json path is: ", command.jsonPath);
+        console.log("The workflow is:", data.workflow);
         jp.apply(data.workflow, command.jsonPath, function(value) { return prompt });
-        console.log("Updated workflow:", data.workflow);
         const body = { 'prompt': data.workflow, 'client_id': client_id };
         const response = await fetch('/api/comfyui/prompt',
         {

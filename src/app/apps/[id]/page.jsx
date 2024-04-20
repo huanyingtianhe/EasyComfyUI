@@ -18,7 +18,7 @@ async function AppPage({ params }) {
     const data = await getData(params.id);
     console.log("Got app: ", data);
     //return APPLogic(data, client_id)
-    return <ImageGenerator data={data} client_id={client_id} />
+    return <ImageGenerator app={data} client_id={client_id} />
 };
 
 export default AppPage;

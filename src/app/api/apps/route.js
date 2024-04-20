@@ -33,7 +33,7 @@ export const POST = async (request) => {
           img: body.img,
           title: body.title,
           desc: body.desc,
-          workflow: body.workflow,
+          workflow: JSON.parse(body.workflow),
           user: {
             connect: {
               email: body.email

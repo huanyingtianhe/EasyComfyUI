@@ -31,10 +31,15 @@ export const DELETE = async (request, { params }) => {
   try {
     const dbClient = await connect();
 
-    await dbClient.app.delete(id);
+    await dbClient.app.delete({
+      where: {
+        id: Number(id),
+      },
+    });
 
-    return new NextResponse("Post has been deleted", { status: 200 });
+    return new NextResponse("App has been deleted", { status: 200 });
   } catch (err) {
+    console.log("Database Error: ", err);
     return new NextResponse("Database Error", { status: 500 });
   }
 };

@@ -4,13 +4,14 @@ import React, { useState, useEffect } from 'react';
 import styles from "./ImageLoaderForm.module.css";
 import Image from "next/image";
 import ImageLoaderForm from "@/components/ImageLoader/ImageLoaderForm"
+import MediaUploader from './MediaUploader';
 import Loading from "/public/loading.png";
 import Avatar from "/public/avatar.jpg"
 
-export default function ImageGenerator({data, client_id}) {
-    console.log(`Start to generate image, data: ${data.img} client_id: ${client_id}`)
+export default function ImageGenerator({app, client_id}) {
+    console.log(`Start to generate image, data: ${app.img} client_id: ${client_id}`)
     const [loading, setLoading] = useState(false);
-    const [srcImage, setSrcImage] = useState(data.img);
+    const [srcImage, setSrcImage] = useState(app.img);
 
     function GetImage(client_id) {
         console.log("Start to call web socket to get image, client_id: ", client_id)
@@ -63,51 +64,34 @@ export default function ImageGenerator({data, client_id}) {
         <div className={styles.container}>
             <div className={styles.top}>
                 <div className={styles.info}>
-                    <h1 className={styles.title}>{data.title}</h1>
+                    <h1 className={styles.title}>{app.title}</h1>
                     <div className={styles.author}>
                         <Image
-                            src={data.user.avatar ? data.user.avatar : Avatar }
+                            src={app.user.avatar ? app.user.avatar : Avatar }
                             alt=""
                             width={40}
                             height={40}
                             className={styles.avatar}
                         />
-                        <span className={styles.username}>{data.user.name}</span>
+                        <span className={styles.username}>{app.user.name}</span>
                     </div>
                 </div>
             </div>
             <div className={styles.content}>
-                {data.commands.map((command) => (
+                {app.commands.map((command) => (
                     command.type === "text" ? 
                     (<div>
                         <p className={styles.desc}>
                             {command.desc}
                         </p>
-                        <ImageLoaderForm data={data} command = {command} client_id={client_id} />
+                        <ImageLoaderForm data={app} command = {command} client_id={client_id} />
                     </div>) :
-                    (command.type === "image" ?
-                    <div>
-                        <p className={styles.desc}>
-                            {command.desc}
-                        </p>
-                        <input
-                            name = "prompt"
-                            type = "text"
-                            className={styles.prompt}
-                            placeholder="Prompt"
-                        ></input>
-                    </div> :
                     (<div>
                         <p className={styles.desc}>
                             {command.desc}
                         </p>
-                        <input
-                            name = "prompt"
-                            type = "text"
-                            className={styles.prompt}
-                            placeholder="Prompt"
-                        ></input>
-                    </div>))
+                        <MediaUploader app={app} command = {command} />
+                    </div>)
                 ))}
             </div>
             <Image

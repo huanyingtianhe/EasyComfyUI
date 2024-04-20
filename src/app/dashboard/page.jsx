@@ -53,12 +53,20 @@ const Dashboard = () => {
     router?.push("/dashboard/login");
   }
 
-  const handleSubmit = async (e) => {
+  // Regular Expression
+  function remove_linebreaks(str) {
+    return str.replace(/[\r\n]+/gm, " ");
+  }
+
+  const handleAppSubmit = async (e) => {
     e.preventDefault();
     const title = e.target[0].value;
     const desc = e.target[1].value;
     const img = e.target[2].value;
-    const workflow = e.target[3].value;
+    const workflow = remove_linebreaks(e.target[3].value);
+
+    // parse the json
+    const workflowStr = JSON.stringify(JSON.parse(workflow));
 
     try {
       await fetch("/api/apps", {
@@ -67,8 +75,30 @@ const Dashboard = () => {
           title,
           desc,
           img,
-          workflow: workflow,
+          workflow: workflowStr,
           email: session.data.user.email,
+        }),
+      });
+      mutate();
+      e.target.reset()
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleCommandSubmit = async (e) => {
+    e.preventDefault();
+    const appName = e.target[0].value;
+    const jsonPath = e.target[1].value;
+    const desc = e.target[2].value;
+
+    try {
+      await fetch("/api/commands", {
+        method: "POST",
+        body: JSON.stringify({
+          appName,
+          jsonPath,
+          desc,
         }),
       });
       mutate();
@@ -95,22 +125,22 @@ const Dashboard = () => {
         <div className={styles.posts}>
           {isLoading
             ? "loading"
-            : data?.map((post) => (
-                <div className={styles.post} key={post._id}>
+            : data?.map((app) => (
+                <div className={styles.post} key={app.id}>
                   <div className={styles.imgContainer}>
-                    <Image src={post.img} alt="" width={200} height={100} />
+                    <Image src={app.img} alt="" width={100} height={100}  />
                   </div>
-                  <h2 className={styles.postTitle}>{post.title}</h2>
+                  <h2 className={styles.postTitle}>{app.title}</h2>
                   <span
                     className={styles.delete}
-                    onClick={() => handleDelete(post._id)}
+                    onClick={() => handleDelete(app.id)}
                   >
                     X
                   </span>
                 </div>
               ))}
         </div>
-        <form className={styles.new} onSubmit={handleSubmit}>
+        <form className={styles.new} onSubmit={handleAppSubmit}>
           <h1>Add New App</h1>
           <input type="text" placeholder="Title" className={styles.input} />
           <input type="text" placeholder="Desc" className={styles.input} />
@@ -121,6 +151,14 @@ const Dashboard = () => {
             cols="30"
             rows="10"
           ></textarea>
+          <button className={styles.button}>Send</button>
+        </form>
+        <form className={styles.new} onSubmit={handleCommandSubmit}>
+          <h1>Add New Parameter for the App</h1>
+          <input type="text" placeholder="App name" className={styles.input} />
+          <input type="text" placeholder="Json Expression" className={styles.input} />
+          <input type="text" placeholder="Parameter description" className={styles.input} />
+          <input type="text" placeholder="Parameter type, allowed values are text, image, video" className={styles.input} />
           <button className={styles.button}>Send</button>
         </form>
       </div>

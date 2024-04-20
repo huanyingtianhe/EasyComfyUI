@@ -7,7 +7,7 @@ import styles from "./ImageLoaderForm.module.css";
 import Background from "/public/illustration.png"
 import Error from 'next/error';
 
-export default function MediaUploader({}) {
+const MediaUploader = ({ app, command }) => {
     const [getFile, setFile] = useState();
     
     async function onSubmit(event) {
@@ -16,6 +16,14 @@ export default function MediaUploader({}) {
         if(!getFile) return;
 
         console.log("Got file:", getFile)
+
+        //Update workflow with media file name
+        const jp = require("jsonpath");
+        console.log("The json path is: ", command.jsonPath);
+        console.log("The app is: ", app)
+        console.log("The type of workflow is : ", typeof app.workflow);
+        jp.apply(app.workflow, command.jsonPath, function(value) { return getFile.name });
+
         const data = new FormData();
         data.set('file', getFile);
         try{
@@ -78,3 +86,5 @@ export default function MediaUploader({}) {
         </div>
     ); 
 }
+
+export default MediaUploader;
