@@ -14,6 +14,7 @@ We also support upload workflow to customize your app now, you can specify the p
 ## Roadmap
 
 - [x] Base Text to image
+- [x] DB model
 - [x] Login and register
 - [x] Add App
 - [x] Video to video
