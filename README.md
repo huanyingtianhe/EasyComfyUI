@@ -3,25 +3,31 @@
 ComfyUI is the most powerful and modular stable diffusion GUI and backend. But it is not easy to use, and has a high learning curve. We build Apps 
 based on the workflows, and provide several interfaces, like input prompt, upload image, upload video. You do not need 
 to take care of the workflow details, what is your focus is only your content. We plan to 
-provide follow functionalities, but we only support "Text to image" so far:
+provide follow functionalities, but we only support "Text to image" and "Video to video" so far:
 
 - Text to Image, Text to Video
 - Image to Image, Image to video
 - Video to video
 
-We also plan to support upload workflow to customize your app in the future.
+We also support upload workflow to customize your app now, you can specify the parameters in your app at the same time.
 
 ## Roadmap
 
 - [x] Base Text to image
 - [x] Login and register
 - [x] Add App
+- [x] Video to video
+- [ ] Customize App to support parameters
 - [ ] Select model
 - [ ] Select styles
 - [ ] Text to video
 - [ ] Image to video
-- [ ] Video to video
-- [ ] Customize App to support parameters
+
+# Screenshot
+Home Page:
+![home](https://github.com/huanyingtianhe/EasyComfyUI/assets/5997003/aa4ec2a8-bd96-44d9-8819-c2f7b3337454)
+Apps Page:
+![apps](https://github.com/huanyingtianhe/EasyComfyUI/assets/5997003/37bc33e9-96fb-436d-9c2f-da10fef03cb1)
 
 # Install
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
