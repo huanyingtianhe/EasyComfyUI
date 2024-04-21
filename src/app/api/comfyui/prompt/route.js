@@ -15,8 +15,9 @@ export const POST = async (request) => {
             body: JSON.stringify(body)
         });
         
-        console.log(await response.json());
-        return new NextResponse("Prompt has been queued", { status: 202 });
+        var responseJson = await response.json();
+        console.log(responseJson);
+        return new NextResponse(JSON.stringify(responseJson), { status: 202 });
     }catch (error) {
         console.log("Failed to queue prompt", error);
         return new NextResponse("Failed to queue prompt", { status: 500 });

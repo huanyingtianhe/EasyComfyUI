@@ -7,25 +7,28 @@ import styles from "./ImageLoaderForm.module.css";
 import Background from "/public/illustration.png"
 import Error from 'next/error';
 
-const MediaUploader = ({ app, command }) => {
+const MediaUploader = ({ app, command, workflow, setWorkflow }) => {
     const [getFile, setFile] = useState();
     
-    async function onSubmit(event) {
+    async function onChange(event) {
         event.preventDefault()
-        console.log("start to submit image")
-        if(!getFile) return;
+        console.log("start to submit media file: ", event)
+        const file = event.target.files[0]
+        setFile(file)
+        if(!file) return;
 
-        console.log("Got file:", getFile)
+        console.log("Got file:", file)
 
         //Update workflow with media file name
         const jp = require("jsonpath");
         console.log("The json path is: ", command.jsonPath);
         console.log("The app is: ", app)
-        console.log("The type of workflow is : ", typeof app.workflow);
-        jp.apply(app.workflow, command.jsonPath, function(value) { return getFile.name });
+        jp.apply(workflow, command.jsonPath, function(value) { return file.name });
+        setWorkflow(workflow)
+        console.log("The updated workflow is : ", workflow);
 
         const data = new FormData();
-        data.set('file', getFile);
+        data.set('file', file);
         try{
 
             const response = await fetch('/api/comfyui/upload/image',
@@ -35,8 +38,9 @@ const MediaUploader = ({ app, command }) => {
             })
             // Handle response if necessary
             if(!response.ok) throw new Error(await response.text());
+            console.log("Upload media file success!")
         }catch(error){
-            console.log("Failed to upload image, error: ", error)
+            console.log("Failed to upload media file, error: ", error)
         }
     }
 
@@ -45,16 +49,13 @@ const MediaUploader = ({ app, command }) => {
 
     return (
         <div className={styles.uploadblock}>
-            <form onSubmit = {onSubmit} className={styles.chooseform}>
+            <form className={styles.chooseform}>
                 <input className={styles.chooseinput}
                     name = "file"
                     type = "file"
                     placeholder="Image"
-                    onChange={(e) => setFile(e.target.files[0])}
+                    onChange={(e) => onChange(e)}
                 ></input>
-                <button className={styles.chooseupload}>
-                    Upload
-                </button>
             </form>
             <div className={styles.choosemedia}>
                 {

@@ -11,7 +11,7 @@
 
 .title{
   flex: 1;
-  font-size: 40px;
+  font-size: 20px;
 }
 
 .desc{
@@ -36,33 +36,44 @@
   font-size: 20px;
   font-weight: 300;
   text-align: justify;
+  display: flex;
+  flex-wrap: wrap;
 }
 
-.form {
+.item{
+  font-size: 18px;
+  font-weight: 300;
+  margin-top: 5px;
+  margin-bottom: 2px;
+}
+
+.promptForm {
   display: flex;
-  justify-content: space-between;
   align-items: stretch;
-  width: 95%;
+  margin-top: 5px;
+  width: 1024px;
+  position: relative;
 }
 
 .prompt{
   padding: 20px;
   background-color: transparent;
-  border: 2px solid #bbb;
-  color:#bbb;
+  border: 2px solid #194c33;
+  color:#e4eae6;
   border-radius: 5px;
   font-size: 18px;
-  flex-grow: 14;
+  flex: 14;
+  width: 80%;
 }
 
 .generate {
-  border: 2px solid #026aa4;
+  border: 2px solid #194c33;
   border-radius: 5px;
   font-size: 20px;
   font-weight: bold;
   color: #fbf7f7;
-  background-color: #026aa4;
-  flex-grow: 1;
+  background-color: #194c33;
+  flex: 1;
 }
 
 .image {
@@ -79,7 +90,6 @@
   display: flex;
   justify-content: space-between;
   align-items: stretch;
-  width: 45%;
 }
 
 .choosemedia {
@@ -90,7 +100,7 @@
 }
 
 .chooseinput{
-  border: 2px solid #026aa4;
+  border: 2px solid #194c33;
   border-radius: 5px;
   color: #fbf7f7;
   background-color: #2f121a;
@@ -98,16 +108,16 @@
 }
 
 .chooseupload {
-  border: 2px solid #026aa4;
+  border: 2px solid #194c33;
   border-radius: 5px;
   font-size: 12px;
   color: #fbf7f7;
-  background-color: #026aa4;
+  background-color: #194c33;
   flex: 1;
 }
 
 .uploadblock{
-  border: 2px solid #026aa4;
+  border: 2px solid #194c33;
   border-radius: 5px;
   display: flex;
   flex-direction: column;

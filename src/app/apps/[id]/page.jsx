@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import ImageGenerator from "@/components/ImageLoader/ImageGenerator"
+import AppDetails from "@/components/ImageLoader/AppDetails"
 
 async function getData(id) {
     const res = await fetch(`http://localhost:3000/api/apps/${id}`, {
@@ -18,7 +18,7 @@ async function AppPage({ params }) {
     const data = await getData(params.id);
     console.log("Got app: ", data);
     //return APPLogic(data, client_id)
-    return <ImageGenerator app={data} client_id={client_id} />
+    return <AppDetails app={data} client_id={client_id} />
 };
 
 export default AppPage;
