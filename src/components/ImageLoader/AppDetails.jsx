@@ -22,66 +22,77 @@ export default function AppDetails({app, client_id}) {
 
     function GetImage(client_id) {
         console.log("Start to call web socket to get image, client_id: ", client_id)
-        // create webSocket
-        const address = process.env.ComfyUI_BASE_ADDRESS.replace("https", "wss");
-        console.log(`socket address: ${address}`);
-        const socket = new ReconnectingWebSocket(address + '/ws?clientId=' + client_id);
-        socket.addEventListener('open', (event) => {
-            console.log('Connected to the server');
-        });
-        socket.addEventListener('error', console.error);
-        socket.addEventListener('message', (event) => {
-            console.log("got event from web socket, event data: ", event.data)
-            const data = JSON.parse(event.data);
+        useEffect( ()=> {
+            // create webSocket
+            const address = process.env.ComfyUI_BASE_ADDRESS.replace("https", "wss");
+            console.log(`socket address: ${address}`);
+            const options = {
+                maxReconnectionDelay: 20000,
+                minReconnectionDelay: 10000 + Math.random() * 1000,
+                connectionTimeout: 20000,
+                reconnectionDelayGrowFactor: 2,
+            };
+            const socket = new ReconnectingWebSocket(address + '/ws?clientId=' + client_id, [], options);
+            socket.addEventListener('open', (event) => {
+                console.log('Connected to the server');
+            });
+            socket.addEventListener('error', console.error);
+            socket.addEventListener('message', (event) => {
+                console.log("got event from web socket, event data: ", event.data)
+                const data = JSON.parse(event.data);
 
-            if (data.type === 'progress') {
-                //IS_GENERATING = true;
-                console.log("Generating...");
-            } else if (data.type === "executing"){
-                console.log("executing...");
-                //setLoading(true);
-                if("node" in data['data'] && data['data']['node'] != null){
-                    const nodeId = parseInt(data['data']['node']);
-                    console.log("last node id: ", nodeId)
-                    setLastNodeId(nodeId)
-                }
-            } else if (data.type === 'executed') {
-                setLoading(false);
-                if('gifs' in data['data']['output']){
-                    const videos = data['data']['output']['gifs'];
-                    for (let i = 0; i < videos.length; i++) {
-                        const filename = videos[i]['filename']
-                        const subfolder = videos[i]['subfolder']
-                        const rand = Math.random();
-                        const path = `/viewvideo?filename=${filename}&type=output&subfolder=${subfolder}&rand=${rand}`;
-                        console.log("Got video path: ", process.env.ComfyUI_BASE_ADDRESS + path);
-                        setResultVideo(process.env.ComfyUI_BASE_ADDRESS + path);
-                        setSrcImage(null);
+                if (data.type === 'progress') {
+                    //IS_GENERATING = true;
+                    console.log("Generating...");
+                } else if (data.type === "executing"){
+                    console.log("executing...");
+                    setLoading(true);
+                    if("node" in data['data'] && data['data']['node'] != null){
+                        const nodeId = parseInt(data['data']['node']);
+                        console.log("last node id: ", nodeId)
+                        setLastNodeId(nodeId)
                     }
-                }else if ('images' in data['data']['output']) {
-                    const images = data['data']['output']['images'];
-                    for (let i = 0; i < images.length; i++) {
-                        const filename = images[i]['filename']
-                        const subfolder = images[i]['subfolder']
-                        const rand = Math.random();
-                        const path = `/view?filename=${filename}&type=output&subfolder=${subfolder}&rand=${rand}`;
-                        console.log("image path: ", process.env.ComfyUI_BASE_ADDRESS + path);
-                        setSrcImage(process.env.ComfyUI_BASE_ADDRESS + path);
-                        setResultVideo(null)
+                } else if (data.type === 'executed') {
+                    setLoading(false);
+                    if('gifs' in data['data']['output']){
+                        const videos = data['data']['output']['gifs'];
+                        for (let i = 0; i < videos.length; i++) {
+                            const filename = videos[i]['filename']
+                            const subfolder = videos[i]['subfolder']
+                            const rand = Math.random();
+                            const path = `/viewvideo?filename=${filename}&type=output&subfolder=${subfolder}&rand=${rand}`;
+                            console.log("Got video path: ", process.env.ComfyUI_BASE_ADDRESS + path);
+                            setResultVideo(process.env.ComfyUI_BASE_ADDRESS + path);
+                            setSrcImage(null);
+                        }
+                    }else if ('images' in data['data']['output']) {
+                        const images = data['data']['output']['images'];
+                        for (let i = 0; i < images.length; i++) {
+                            const filename = images[i]['filename']
+                            const subfolder = images[i]['subfolder']
+                            const rand = Math.random();
+                            const path = `/view?filename=${filename}&type=output&subfolder=${subfolder}&rand=${rand}`;
+                            console.log("image path: ", process.env.ComfyUI_BASE_ADDRESS + path);
+                            setSrcImage(process.env.ComfyUI_BASE_ADDRESS + path);
+                            setResultVideo(null)
+                        }
+                    }
+                } else if (data.type === 'execution_interrupted') {
+                    console.log('Execution Interrupted');
+                } else if (data.type === 'status') {
+                    const IS_GENERATING = (data['data']['status']['exec_info']['queue_remaining'] > 0) ? true : false;
+                    console.log("is generationg: ", IS_GENERATING);
+                    console.log("is loading: ", loading);
+                    if (!IS_GENERATING && promptId != null && loading){
+                        setLoadingHistory(true)
+                        setLoading(false);
                     }
                 }
-            } else if (data.type === 'execution_interrupted') {
-                console.log('Execution Interrupted');
-            } else if (data.type === 'status') {
-                const IS_GENERATING = (data['data']['status']['exec_info']['queue_remaining'] > 0) ? true : false;
-                console.log("is generationg: ", IS_GENERATING);
-                console.log("is loading: ", loading);
-                if (!IS_GENERATING && promptId != null && loading){
-                    setLoadingHistory(true)
-                }
-                setLoading(IS_GENERATING);
-            }
-        });
+            });
+
+            // clean up function
+            return () => socket.close();
+        }, []);
     }
 
     useEffect(() => {

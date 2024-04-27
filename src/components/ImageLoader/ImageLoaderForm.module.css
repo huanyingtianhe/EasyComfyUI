@@ -58,7 +58,7 @@
 .prompt{
   padding: 20px;
   background-color: transparent;
-  border: 2px solid #194c33;
+  border: 2px solid #53c28b;
   color:#e4eae6;
   border-radius: 5px;
   font-size: 18px;
@@ -67,12 +67,12 @@
 }
 
 .generate {
-  border: 2px solid #194c33;
+  border: 2px solid #53c28b;
   border-radius: 5px;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
   color: #fbf7f7;
-  background-color: #194c33;
+  background-color: #53c28b;
   flex: 1;
 }
 
@@ -100,7 +100,7 @@
 }
 
 .chooseinput{
-  border: 2px solid #194c33;
+  border: 2px solid #53c28b;
   border-radius: 5px;
   color: #fbf7f7;
   background-color: #2f121a;
@@ -108,16 +108,16 @@
 }
 
 .chooseupload {
-  border: 2px solid #194c33;
+  border: 2px solid #53c28b;
   border-radius: 5px;
   font-size: 12px;
   color: #fbf7f7;
-  background-color: #194c33;
+  background-color: #53c28b;
   flex: 1;
 }
 
 .uploadblock{
-  border: 2px solid #194c33;
+  border: 2px solid #53c28b;
   border-radius: 5px;
   display: flex;
   flex-direction: column;

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "./page.module.css";
-import Hero from "/public/hero.png";
+import HomeImage from "/public/hero.png";
 import Button from "@/components/Button/Button";
 
 export default function Home() {
@@ -16,7 +16,7 @@ export default function Home() {
         <Button url="/portfolio" text="See Works by EasyComfyUI"/>
       </div>
       <div className={styles.item}>
-        <Image src={Hero} alt="" className={styles.img} />
+        <Image src={HomeImage} alt="" className={styles.img} />
       </div>
     </div>
   );
