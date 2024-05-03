@@ -46,9 +46,9 @@ export const POST = async (request) => {
       }
     )
 
-    return new NextResponse("Post has been created", { status: 201 });
+    return new NextResponse("App has been created", { status: 201 });
   } catch (err) {
     console.log("Got error when add app: ", err);
-    return new NextResponse("Database Error", { status: 500 });
+    return new NextResponse("Got error when add app", { status: 500 });
   }
 };

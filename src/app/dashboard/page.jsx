@@ -91,6 +91,7 @@ const Dashboard = () => {
     const appName = e.target[0].value;
     const jsonPath = e.target[1].value;
     const desc = e.target[2].value;
+    const type = e.target[3].value;
 
     try {
       await fetch("/api/commands", {
@@ -99,6 +100,7 @@ const Dashboard = () => {
           appName,
           jsonPath,
           desc,
+          type,
         }),
       });
       mutate();
