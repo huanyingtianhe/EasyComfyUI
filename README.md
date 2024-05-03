@@ -63,8 +63,7 @@ The format of a local mysql instance looks like this:
 Then we need to create the table in the db instance, we use Prisma to help us do that. Prisma ORM is an open-source next-generation ORM. For development, you only need to run following commands, it will create tables and keys in your database.
 
 ```bash
-npm install prisma --save-dev
-npx prisma init
+yarn install
 npx prisma migrate dev --name init
 ```
 
