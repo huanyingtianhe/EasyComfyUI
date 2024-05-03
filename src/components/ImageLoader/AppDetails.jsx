@@ -9,6 +9,7 @@ import Loading from "/public/loading.png";
 import Avatar from "/public/avatar.jpg"
 import ReconnectingWebSocket from 'reconnecting-websocket';
 import ReactPlayer from 'react-player';
+import { useEnv } from '@/context/EnvContext';
 
 export default function AppDetails({app, client_id}) {
     console.log(`Start to generate image, data: ${app.img} client_id: ${client_id}`)
@@ -19,12 +20,13 @@ export default function AppDetails({app, client_id}) {
     const [lastNodeId, setLastNodeId] = useState(null);
     const [promptId, setPromptId] = useState(null);
     const [loadingHistory, setLoadingHistory] = useState(false)
+    const env = useEnv();
 
     function GetImage(client_id) {
         console.log("Start to call web socket to get image, client_id: ", client_id)
         useEffect( ()=> {
             // create webSocket
-            const address = process.env.ComfyUI_BASE_ADDRESS.replace("https", "wss");
+            const address = env.ComfyUI_BASE_ADDRESS.replace("https", "wss");
             console.log(`socket address: ${address}`);
             const options = {
                 maxReconnectionDelay: 20000,
