@@ -30,6 +30,9 @@ Home Page:
 Apps Page:
 ![apps](https://github.com/huanyingtianhe/EasyComfyUI/assets/5997003/37bc33e9-96fb-436d-9c2f-da10fef03cb1)
 
+Live demo:
+[EasyComfyUI: 更容易上手的ComfyUI-哔哩哔哩](https://b23.tv/NTaFyoV)
+
 # Install
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
