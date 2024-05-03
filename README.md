@@ -36,9 +36,12 @@ Live demo:
 # Install
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Prepare env file
+Rename the env.template to .env, and fill in the value with your own. The first part is related with Auth, you do not need to take care at first. What you need to notice is the second section. ComfyUI_BASE_ADDRESS is the url of your ComfyUI service, no matter it is local or remote. We can get the DATABASE_URL following the steps described below.
+
 ## Prepare DB
 
-If you already have a mysql instance, copy the mysql connection string to the value of the DATABASE_URL variable directly in .env file, and skip the section "Setup Mysql Instance". I will provide a db connection for test purpose later. 
+If you already have a mysql instance, copy the mysql connection string, it is what DATABASE_URL variable need, and skip the section "Setup Mysql Instance".
 
 ### Setup Mysql Instance
 Install Mysql in your machine if you do not have a mysql instance. The question is how to setup the mysql instance?
@@ -54,7 +57,7 @@ It requires you install the docker, docker-compose and mysql in your machine. Af
 mysql -h 127.0.0.1 -P 3306 -u root -p
 ```
 
-The format of a local mysql instance looks like this:
+The format of the connection string for a local mysql instance looks like this:
 
 ```bash
 "mysql://root:password@localhost:3306/easy_comfyui"
