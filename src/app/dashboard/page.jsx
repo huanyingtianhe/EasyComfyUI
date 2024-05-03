@@ -153,7 +153,7 @@ const Dashboard = () => {
             cols="30"
             rows="10"
           ></textarea>
-          <button className={styles.button}>Send</button>
+          <button className={styles.button}>Add</button>
         </form>
         <form className={styles.new} onSubmit={handleCommandSubmit}>
           <h1>Add New Parameter for the App</h1>
@@ -161,7 +161,7 @@ const Dashboard = () => {
           <input type="text" placeholder="Json Expression" className={styles.input} />
           <input type="text" placeholder="Parameter description" className={styles.input} />
           <input type="text" placeholder="Parameter type, allowed values are text, image, video" className={styles.input} />
-          <button className={styles.button}>Send</button>
+          <button className={styles.button}>Add</button>
         </form>
       </div>
     );

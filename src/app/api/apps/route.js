@@ -2,13 +2,27 @@ import { NextResponse } from "next/server";
 import connect from "@/utils/db";
 
 export const GET = async (request) => {
-  const url = new URL(request.url);
-  
+  var userName = request.nextUrl.searchParams.get("username")
+  console.log("Try to get apps, user name: ", userName)
+
   try {
     const dbClient = await connect();
+    const user = userName ? await dbClient.user.findFirst({
+      where: {
+        name: userName,
+      },
+    }) : null;
 
-    const apps = await dbClient.app.findMany({
-      include:{
+    const apps = userName ? await dbClient.app.findMany({
+      where: {
+        authorId: user.id
+      },
+      include: {
+        user: true,
+      },
+    }) :
+    await dbClient.app.findMany({
+      include: {
         user: true,
       },
     });
