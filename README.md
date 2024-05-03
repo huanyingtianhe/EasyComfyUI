@@ -36,22 +36,31 @@ Live demo:
 # Install
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
-First, Install Mysql in your env, create a database for the project, copy the mysql connection string to DATABASE_URL in .env file.
-Then, run the development server:
+## Prepare DB
+
+If you already have a mysql instance, copy the mysql connection string to the value of the DATABASE_URL variable directly in .env file, and skip the section "Setup Mysql Instance". I will provide a db connection for test purpose later. 
+
+### Setup Mysql Instance
+Install Mysql in your machine if you do not have a mysql instance. The question is how to setup the mysql instance?
+It is easy, just switch to the root folder of the project in command line tool, then run the command:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+sudo docker compose up -d
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+It requires you install the docker, docker-compose and mysql in your machine. After the execution, it will create a mysql instance and a database named "easy_comfyui", you can connect it with below command:
 
+```bash
+mysql -h 127.0.0.1 -P 3306 -u root -p
+```
+
+The format of a local mysql instance looks like this:
+
+```bash
+"mysql://root:password@localhost:3306/easy_comfyui"
+```
 ## How to use Prisma
-Prisma ORM is an open-source next-generation ORM. For development, you only need to run following commands, it will create tables and keys in your database.
+Then we need to create the table in the db instance, we use Prisma to help us do that. Prisma ORM is an open-source next-generation ORM. For development, you only need to run following commands, it will create tables and keys in your database.
 
 ```bash
 npm install prisma --save-dev
@@ -64,6 +73,21 @@ You can find more in the following documents:
 [Getting started](https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases-node-mysql)
 
 [CRUD document](https://www.prisma.io/docs/orm/prisma-client/queries/crud#read)
+
+## Start the Website
+Then, run the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+
 
 ## Learn More
 

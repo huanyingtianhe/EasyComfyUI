@@ -4,8 +4,18 @@ services:
   mysql:
     image: mysql:8.0
     environment:
-      - MYSQL_ROOT_PASSWORD
+      MYSQL_DATABASE: 'easy_comfyui'
+      # So you don't have to use root, but you can if you like
+      MYSQL_USER: 'user'
+      # You can use whatever password you like
+      MYSQL_PASSWORD: 'password'
+      # Password for root access
+      MYSQL_ROOT_PASSWORD: 'password'
     volumes:
       - mysql:/var/lib/mysql
     ports:
       - 33060:3306
+  
+# Names our volume
+volumes:
+  mysql:
