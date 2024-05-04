@@ -1,5 +1,5 @@
 {
-    "buildCommand": "next build",
+    "buildCommand": "prisma generate && next build",
     "installCommand": "yarn install",
     "images": {
         "sizes": [15, 40, 100, 240, 256, 512, 640, 1080, 2048, 3840],
