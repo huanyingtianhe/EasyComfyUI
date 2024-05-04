@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 export const POST = async (request) => {
   const { name, email, password } = await request.json();
-  console.log(`register, get name: ${name}, email: ${email}, password: ${password}`)
+  console.log(`register, get name: ${name}, email: ${email}`)
 
   const dbClient = await connect();
 
