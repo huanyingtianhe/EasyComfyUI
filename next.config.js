@@ -1,7 +1,24 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["images.pexels.com", "t12.baidu.com", "c-ssl.dtstatic.com", "reductions-scanners-industrial-courage.trycloudflare.com", "img0.baidu.com"],
+    "imageSizes": [15, 40, 100, 240, 256, 512, 640, 1080, 2048, 3840],
+    "remotePatterns": [
+      {
+        "protocol": "https",
+        "hostname": "**.baidu.com",
+        "port": ""
+      },
+      {
+        "protocol": "https",
+        "hostname": "images.pexels.com",
+        "port": ""
+      },
+      {
+        "protocol": "https",
+        "hostname": "**.trycloudflare.com",
+        "port": ""
+      }
+    ],
   },
 };
 

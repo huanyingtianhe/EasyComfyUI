@@ -1,0 +1,29 @@
+{
+    "buildCommand": "next build",
+    "installCommand": "yarn install",
+    "images": {
+        "sizes": [15, 40, 100, 240, 256, 512, 640, 1080, 2048, 3840],
+        "remotePatterns": [
+          {
+            "protocol": "https",
+            "hostname": "**.baidu.com",
+            "port": ""
+          },
+          {
+            "protocol": "https",
+            "hostname": "images.pexels.com",
+            "port": ""
+          },
+          {
+            "protocol": "https",
+            "hostname": "**.trycloudflare.com",
+            "port": ""
+          }
+        ],
+        "minimumCacheTTL": 60,
+        "formats": ["image/webp"],
+        "dangerouslyAllowSVG": false,
+        "contentSecurityPolicy": "script-src 'none'; frame-src 'none'; sandbox;",
+        "contentDispositionType": "inline"
+      }
+}
