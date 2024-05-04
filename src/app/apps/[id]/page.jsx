@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 import AppDetails from "@/components/ImageLoader/AppDetails"
 
 async function getData(id) {
-    const res = await fetch(`http://localhost:3000/api/apps/${id}`, {
+    const res = await fetch(`http://127.0.0.1:3000/api/apps/${id}`, {
       cache: "no-store",
     });
 
