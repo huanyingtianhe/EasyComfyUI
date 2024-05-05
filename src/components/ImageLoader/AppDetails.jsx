@@ -11,16 +11,37 @@ import ReconnectingWebSocket from 'reconnecting-websocket';
 import ReactPlayer from 'react-player';
 import { useEnv } from '@/context/EnvContext';
 
-export default function AppDetails({app, client_id}) {
-    console.log(`Start to generate image, data: ${app.img} client_id: ${client_id}`)
+export default function AppDetails({appId, client_id}) {
+    console.log(`Start to generate image, id: ${appId} client_id: ${client_id}`)
+    const [app, setApp] = useState(null);
     const [loading, setLoading] = useState(false);
-    const [srcImage, setSrcImage] = useState(app.img);
+    const [srcImage, setSrcImage] = useState("https://github.com/huanyingtianhe/EasyComfyUI/assets/5997003/d6df6d6b-510f-48eb-bc8e-ee165fd5c55b");
     const [resultVideo, setResultVideo] = useState(null);
-    const [workflow, setWorkflow] = useState(app.workflow);
+    const [workflow, setWorkflow] = useState(null);
     const [lastNodeId, setLastNodeId] = useState(null);
     const [promptId, setPromptId] = useState(null);
     const [loadingHistory, setLoadingHistory] = useState(false)
     const env = useEnv();
+
+    useEffect(()=> {
+        const fetchData = async (id) =>{
+            const res = await fetch(`/api/apps/${id}`, {
+              cache: "no-store",
+            });
+        
+            if (!res.ok) {
+              return notFound()
+            }
+            
+            const appData = await res.json()
+            setApp(appData);
+            setWorkflow(appData.workflow);
+        }
+
+        fetchData(appId).catch((e) => {
+            console.error("An error occurred while fetching data: ", e);
+        })
+    }, []);
 
     function GetImage(client_id) {
         console.log("Start to call web socket to get image, client_id: ", client_id)
@@ -129,7 +150,7 @@ export default function AppDetails({app, client_id}) {
     }
 
     return (
-        <div className={styles.container}>
+        app && <div className={styles.container}>
             <div className={styles.top}>
                 <div className={styles.info}>
                     <h1 className={styles.title}>{app.title}</h1>

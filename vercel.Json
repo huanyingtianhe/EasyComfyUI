@@ -16,6 +16,11 @@
             "protocol": "https",
             "hostname": "**.trycloudflare.com",
             "port": ""
+          },
+          {
+            "protocol": "https",
+            "hostname": "github.com",
+            "port": ""
           }
         ],
         "minimumCacheTTL": 60,

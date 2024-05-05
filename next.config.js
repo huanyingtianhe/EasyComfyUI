@@ -17,6 +17,11 @@ const nextConfig = {
         "protocol": "https",
         "hostname": "**.trycloudflare.com",
         "port": ""
+      },
+      {
+        "protocol": "https",
+        "hostname": "github.com",
+        "port": ""
       }
     ],
   },
