@@ -18,7 +18,10 @@ We also support upload workflow to customize your app now, you can specify the p
 - [x] Login and register
 - [x] Add App
 - [x] Video to video
-- [ ] Customize App to support parameters
+- [x] Customize App to support parameters
+- [x] Support vercel
+- [ ] Add settings in UI
+- [ ] Adapt to mobile use
 - [ ] Select model
 - [ ] Select styles
 - [ ] Text to video
