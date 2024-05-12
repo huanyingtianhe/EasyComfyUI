@@ -9,7 +9,7 @@ import { EnvProvider } from "@/context/EnvContext";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Lama Dev",
+  title: "EasyComfyUI",
   description: "This is the description",
 };
 
