@@ -84,8 +84,8 @@ export default function AppDetails({appId, client_id}) {
                             const subfolder = videos[i]['subfolder']
                             const rand = Math.random();
                             const path = `/viewvideo?filename=${filename}&type=output&subfolder=${subfolder}&rand=${rand}`;
-                            console.log("Got video path: ", process.env.ComfyUI_BASE_ADDRESS + path);
-                            setResultVideo(process.env.ComfyUI_BASE_ADDRESS + path);
+                            console.log("Got video path: ", env.ComfyUI_BASE_ADDRESS + path);
+                            setResultVideo(env.ComfyUI_BASE_ADDRESS + path);
                             setSrcImage(null);
                         }
                     }else if ('images' in data['data']['output']) {
@@ -95,8 +95,8 @@ export default function AppDetails({appId, client_id}) {
                             const subfolder = images[i]['subfolder']
                             const rand = Math.random();
                             const path = `/view?filename=${filename}&type=output&subfolder=${subfolder}&rand=${rand}`;
-                            console.log("image path: ", process.env.ComfyUI_BASE_ADDRESS + path);
-                            setSrcImage(process.env.ComfyUI_BASE_ADDRESS + path);
+                            console.log("image path: ", env.ComfyUI_BASE_ADDRESS + path);
+                            setSrcImage(env.ComfyUI_BASE_ADDRESS + path);
                             setResultVideo(null)
                         }
                     }
