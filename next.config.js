@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    "imageSizes": [15, 40, 100, 240, 256, 512, 640, 1080, 2048, 3840],
     "remotePatterns": [
       {
         "protocol": "https",
@@ -15,7 +14,7 @@ const nextConfig = {
       },
       {
         "protocol": "https",
-        "hostname": "**.trycloudflare.com",
+        "hostname": "ensemble-updating-divx-advancement.trycloudflare.com",
         "port": ""
       },
       {

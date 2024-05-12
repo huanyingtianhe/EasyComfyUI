@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./ImageLoaderForm.module.css";
 import {GenerateImag} from "@/utils/action"
 
-const PromptForm = ({ data, command, client_id, workflow, setWorkflow, setPromptId }) => {
+const PromptForm = ({ data, command, client_id, workflow, setWorkflow, setPromptId, setLoading }) => {
     async function onSubmit(event) {
         event.preventDefault()
         const formData = new FormData(event.target)
@@ -21,9 +21,10 @@ const PromptForm = ({ data, command, client_id, workflow, setWorkflow, setPrompt
           body: JSON.stringify(body),
         })
         // Handle response if necessary
-        const res = await response.json()
-        console.log("Got response from comfyUI api: ", res)
-        setPromptId(res['prompt_id'])
+        const res = await response.json();
+        console.log("Got response from comfyUI api: ", res);
+        setPromptId(res['prompt_id']);
+        setLoading(true);
     }
 
     console.log(`received parameters in image loader form, data: ${data}, client_id: ${client_id}`);

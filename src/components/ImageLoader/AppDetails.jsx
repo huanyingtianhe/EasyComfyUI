@@ -5,7 +5,7 @@ import styles from "./ImageLoaderForm.module.css";
 import Image from "next/image";
 import PromptForm from "@/components/ImageLoader/PromptForm"
 import MediaUploader from './MediaUploader';
-import Loading from "/public/loading.png";
+import LoadingIcon from "/public/loading.png";
 import Avatar from "/public/avatar.jpg"
 import ReconnectingWebSocket from 'reconnecting-websocket';
 import ReactPlayer from 'react-player';
@@ -43,80 +43,81 @@ export default function AppDetails({appId, client_id}) {
         })
     }, []);
 
-    function GetImage(client_id) {
+    useEffect( ()=> {
         console.log("Start to call web socket to get image, client_id: ", client_id)
-        useEffect( ()=> {
-            // create webSocket
-            const address = env.ComfyUI_BASE_ADDRESS.replace("https", "wss");
-            console.log(`socket address: ${address}`);
-            const options = {
-                maxReconnectionDelay: 20000,
-                minReconnectionDelay: 10000 + Math.random() * 1000,
-                connectionTimeout: 20000,
-                reconnectionDelayGrowFactor: 2,
-            };
-            const socket = new ReconnectingWebSocket(address + '/ws?clientId=' + client_id, [], options);
-            socket.addEventListener('open', (event) => {
-                console.log('Connected to the server');
-            });
-            socket.addEventListener('error', console.error);
-            socket.addEventListener('message', (event) => {
-                console.log("got event from web socket, event data: ", event.data)
-                const data = JSON.parse(event.data);
+        // create webSocket
+        const address = env.ComfyUI_BASE_ADDRESS.replace("https", "wss");
+        console.log(`socket address: ${address}`);
+        const options = {
+            maxReconnectionDelay: 20000,
+            minReconnectionDelay: 10000 + Math.random() * 1000,
+            connectionTimeout: 20000,
+            reconnectionDelayGrowFactor: 2,
+        };
+        const socket = new ReconnectingWebSocket(address + '/ws?clientId=' + client_id, [], options);
+        socket.addEventListener('open', (event) => {
+            console.log('Connected to the server');
+        });
+        socket.addEventListener('error', console.error);
+        socket.addEventListener('message', (event) => {
+            console.log("got event from web socket, event data: ", event.data)
+            const data = JSON.parse(event.data);
 
-                if (data.type === 'progress') {
-                    //IS_GENERATING = true;
-                    console.log("Generating...");
-                } else if (data.type === "executing"){
-                    console.log("executing...");
-                    setLoading(true);
-                    if("node" in data['data'] && data['data']['node'] != null){
-                        const nodeId = parseInt(data['data']['node']);
-                        console.log("last node id: ", nodeId)
-                        setLastNodeId(nodeId)
+            if (data.type === 'progress') {
+                //IS_GENERATING = true;
+                console.log("Generating...");
+                console.log("is loading: ", loading);
+            } else if (data.type === "executing"){
+                //setLoading(true);
+                console.log("executing...");
+                console.log("is loading: ", loading);
+                if("node" in data['data'] && data['data']['node'] != null){
+                    const nodeId = parseInt(data['data']['node']);
+                    console.log("last node id: ", nodeId)
+                    setLastNodeId(nodeId)
+                }
+            } else if (data.type === 'executed') {
+                if('gifs' in data['data']['output']){
+                    const videos = data['data']['output']['gifs'];
+                    for (let i = 0; i < videos.length; i++) {
+                        const filename = videos[i]['filename']
+                        const subfolder = videos[i]['subfolder']
+                        const rand = Math.random();
+                        const path = `/viewvideo?filename=${filename}&type=output&subfolder=${subfolder}&rand=${rand}`;
+                        console.log("Got video path: ", env.ComfyUI_BASE_ADDRESS + path);
+                        setResultVideo(env.ComfyUI_BASE_ADDRESS + path);
+                        setSrcImage(null);
                     }
-                } else if (data.type === 'executed') {
-                    setLoading(false);
-                    if('gifs' in data['data']['output']){
-                        const videos = data['data']['output']['gifs'];
-                        for (let i = 0; i < videos.length; i++) {
-                            const filename = videos[i]['filename']
-                            const subfolder = videos[i]['subfolder']
-                            const rand = Math.random();
-                            const path = `/viewvideo?filename=${filename}&type=output&subfolder=${subfolder}&rand=${rand}`;
-                            console.log("Got video path: ", env.ComfyUI_BASE_ADDRESS + path);
-                            setResultVideo(env.ComfyUI_BASE_ADDRESS + path);
-                            setSrcImage(null);
-                        }
-                    }else if ('images' in data['data']['output']) {
-                        const images = data['data']['output']['images'];
-                        for (let i = 0; i < images.length; i++) {
-                            const filename = images[i]['filename']
-                            const subfolder = images[i]['subfolder']
-                            const rand = Math.random();
-                            const path = `/view?filename=${filename}&type=output&subfolder=${subfolder}&rand=${rand}`;
-                            console.log("image path: ", env.ComfyUI_BASE_ADDRESS + path);
-                            setSrcImage(env.ComfyUI_BASE_ADDRESS + path);
-                            setResultVideo(null)
-                        }
-                    }
-                } else if (data.type === 'execution_interrupted') {
-                    console.log('Execution Interrupted');
-                } else if (data.type === 'status') {
-                    const IS_GENERATING = (data['data']['status']['exec_info']['queue_remaining'] > 0) ? true : false;
-                    console.log("is generationg: ", IS_GENERATING);
-                    console.log("is loading: ", loading);
-                    if (!IS_GENERATING && promptId != null && loading){
-                        setLoadingHistory(true)
-                        setLoading(false);
+                }else if ('images' in data['data']['output']) {
+                    const images = data['data']['output']['images'];
+                    for (let i = 0; i < images.length; i++) {
+                        const filename = images[i]['filename']
+                        const subfolder = images[i]['subfolder']
+                        const rand = Math.random();
+                        const path = `/view?filename=${filename}&type=output&subfolder=${subfolder}&rand=${rand}`;
+                        console.log("image path: ", env.ComfyUI_BASE_ADDRESS + path);
+                        setSrcImage(env.ComfyUI_BASE_ADDRESS + path);
+                        setResultVideo(null)
                     }
                 }
-            });
 
-            // clean up function
-            return () => socket.close();
-        }, []);
-    }
+                setLoading(false);
+            } else if (data.type === 'execution_interrupted') {
+                console.log('Execution Interrupted');
+            } else if (data.type === 'status') {
+                const IS_GENERATING = (data['data']['status']['exec_info']['queue_remaining'] > 0) ? true : false;
+                console.log("is generationg: ", IS_GENERATING);
+                console.log("is loading: ", loading);
+                if (!IS_GENERATING && promptId != null && loading){
+                    setLoadingHistory(true)
+                    setLoading(false);
+                }
+            }
+        });
+
+        // clean up function
+        return () => socket.close();
+    }, []);
 
     useEffect(() => {
         const fetchHistory = async() => {
@@ -142,13 +143,6 @@ export default function AppDetails({appId, client_id}) {
         fetchHistory().catch(console.error);
       }, [loadingHistory]);
 
-    try{
-
-        GetImage(client_id);
-    }catch (error){
-        console.log("failed to get image, error: ", error)
-    }
-
     return (
         app && <div className={styles.container}>
             <div className={styles.top}>
@@ -173,7 +167,7 @@ export default function AppDetails({appId, client_id}) {
                         <p className={styles.desc}>
                             {command.desc}
                         </p>
-                        <PromptForm data={app} command = {command} client_id={client_id} workflow={workflow} setWorkflow={setWorkflow} setPromptId={setPromptId}/>
+                        <PromptForm data={app} command = {command} client_id={client_id} workflow={workflow} setWorkflow={setWorkflow} setPromptId={setPromptId} setLoading={setLoading}/>
                     </div>) :
                     (<div className={styles.item} key={command.id}>
                         <p className={styles.desc}>
@@ -183,16 +177,24 @@ export default function AppDetails({appId, client_id}) {
                     </div>)
                 ))}
             </div>
-                {   srcImage && (<Image
-                        src={loading? Loading : srcImage}
+                {   loading && (<Image
+                        src={LoadingIcon}
                         alt=""
                         width={512}
                         height={512}
-                        className={loading? styles.loading : styles.image}
+                        className={ styles.loading }
+                    />)
+                }
+                {   !loading && srcImage && (<Image
+                        src={srcImage}
+                        alt=""
+                        width={512}
+                        height={512}
+                        className={styles.image}
                     />)
                 }
                 {
-                    resultVideo && (<ReactPlayer url={resultVideo} controls={true}/>)
+                    !loading && resultVideo && (<ReactPlayer url={resultVideo} controls={true}/>)
                 }
         </div>
     );
