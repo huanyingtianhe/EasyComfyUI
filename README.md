@@ -22,7 +22,7 @@ We also support upload workflow to customize your app now, you can specify the p
 - [x] Support vercel
 - [ ] Add limitation for free users
 - [ ] Add settings in UI
-- [ ] Adapt to mobile use
+- [ ] Adapt to mobile devices
 - [ ] Select model
 - [ ] Select styles
 - [ ] Text to video
