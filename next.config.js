@@ -14,7 +14,7 @@ const nextConfig = {
       },
       {
         "protocol": "https",
-        "hostname": "ensemble-updating-divx-advancement.trycloudflare.com",
+        "hostname": "**.trycloudflare.com",
         "port": ""
       },
       {
