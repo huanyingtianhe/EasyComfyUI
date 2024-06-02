@@ -20,6 +20,7 @@ We also support upload workflow to customize your app now, you can specify the p
 - [x] Video to video
 - [x] Customize App to support parameters
 - [x] Support vercel
+- [x] Start ComfyUI backend automatically
 - [ ] Add limitation for free users
 - [ ] Add settings in UI
 - [ ] Adapt to mobile devices
