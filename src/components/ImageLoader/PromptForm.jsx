@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./ImageLoaderForm.module.css";
-import Config from "@/components/Config/config";
+import Config from "@/components/Config/Config";
 
 const PromptForm = ({ data, command, client_id, workflow, setWorkflow, setPromptId, setLoading }) => {
     const config = Config()

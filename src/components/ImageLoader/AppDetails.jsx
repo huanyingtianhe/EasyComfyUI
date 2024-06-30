@@ -9,7 +9,7 @@ import LoadingIcon from "/public/loading.png";
 import Avatar from "/public/avatar.jpg"
 import ReconnectingWebSocket from 'reconnecting-websocket';
 import ReactPlayer from 'react-player';
-import Config from '@/components/Config/config';
+import Config from '@/components/Config/Config';
 
 export default function AppDetails({appId, client_id}) {
     console.log(`Start to generate image, id: ${appId} client_id: ${client_id}`)

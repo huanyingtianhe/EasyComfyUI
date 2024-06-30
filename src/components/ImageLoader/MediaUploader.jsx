@@ -6,7 +6,7 @@ import ReactPlayer from 'react-player';
 import styles from "./ImageLoaderForm.module.css";
 import Background from "/public/illustration.png"
 import Error from 'next/error';
-import Config from '@/components/Config/config';
+import Config from '@/components/Config/Config';
 
 const MediaUploader = ({ app, command, workflow, setWorkflow }) => {
     const [getFile, setFile] = useState();
