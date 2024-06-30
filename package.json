@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@prisma/client": "^5.12.1",
+    "azure-sdk-for-js": "^0.0.1",
     "bcryptjs": "^2.4.3",
     "eslint": "8.41.0",
     "eslint-config-next": "14.0.4",
@@ -22,7 +23,8 @@
     "react-player": "^2.16.0",
     "reconnecting-websocket": "^4.4.0",
     "swr": "2.1.5",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "zustand": "^4.5.4"
   },
   "devDependencies": {
     "prisma": "^5.12.1"

@@ -1,18 +1,21 @@
 import { NextResponse } from "next/server";
 
 export const POST = async (request) => {
-    const body = await request.json();
-    console.log("queue a new prompt in comfyui, body: ", body)
+    //const body = await request.json();
+    const data = await request.formData();
+    const comfyUIBaseAddress = data.get("comfyUIBaseAddress");
+    const body = data.get("prompt");
+    console.log("queue a new prompt in comfyui, body: ", body);
     try{
         // queue prompt
-        console.log("request to url: ", `${process.env.ComfyUI_BASE_ADDRESS}/prompt`)
-        const response = await fetch(`${process.env.ComfyUI_BASE_ADDRESS}/prompt`, {
+        console.log("request to url: ", `${comfyUIBaseAddress}/prompt`)
+        const response = await fetch(`${comfyUIBaseAddress}/prompt`, {
             method: 'POST',
             cache: 'no-cache',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(body)
+            body: body
         });
         
         var responseJson = await response.json();

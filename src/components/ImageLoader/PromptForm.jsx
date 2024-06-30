@@ -1,8 +1,9 @@
 import React from "react";
 import styles from "./ImageLoaderForm.module.css";
-import {GenerateImag} from "@/utils/action"
+import Config from "../Config/config";
 
 const PromptForm = ({ data, command, client_id, workflow, setWorkflow, setPromptId, setLoading }) => {
+    const config = Config()
     async function onSubmit(event) {
         event.preventDefault()
         const formData = new FormData(event.target)
@@ -13,12 +14,15 @@ const PromptForm = ({ data, command, client_id, workflow, setWorkflow, setPrompt
         jp.apply(workflow, command.jsonPath, function(value) { return prompt });
         setWorkflow(workflow)
         console.log("The updated workflow is:", workflow);
-
         const body = { 'prompt': workflow, 'client_id': client_id };
+        const data = new FormData();
+        data.set("comfyUIBaseAddress", config.comfyUIBaseAddress);
+        data.set("prompt", JSON.stringify(body));
+
         const response = await fetch('/api/comfyui/prompt',
         {
           method: 'POST',
-          body: JSON.stringify(body),
+          body: data,
         })
         // Handle response if necessary
         const res = await response.json();

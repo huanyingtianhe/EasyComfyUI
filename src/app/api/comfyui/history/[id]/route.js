@@ -1,14 +1,15 @@
 import { NextResponse } from "next/server";
 
-export const GET = async (request, { params }) => {
+export const POST = async (request, { params }) => {
     console.log(params);
     const { id } = params;
-
+    const data = await request.formData();
+    const comfyUIBaseAddress = data.get("comfyUIBaseAddress");
     // upload image
-    console.log("The url of getting history info: ", `${process.env.ComfyUI_BASE_ADDRESS}/history/${id}`)
+    console.log("The url of getting history info: ", `${comfyUIBaseAddress}/history/${id}`)
     try{
 
-        const response = await fetch(`${process.env.ComfyUI_BASE_ADDRESS}/history/${id}`, {
+        const response = await fetch(`${comfyUIBaseAddress}/history/${id}`, {
             method: 'GET',
         });
 

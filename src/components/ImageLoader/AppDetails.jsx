@@ -9,7 +9,7 @@ import LoadingIcon from "/public/loading.png";
 import Avatar from "/public/avatar.jpg"
 import ReconnectingWebSocket from 'reconnecting-websocket';
 import ReactPlayer from 'react-player';
-import { useEnv } from '@/context/EnvContext';
+import Config from '../Config/config';
 
 export default function AppDetails({appId, client_id}) {
     console.log(`Start to generate image, id: ${appId} client_id: ${client_id}`)
@@ -21,7 +21,7 @@ export default function AppDetails({appId, client_id}) {
     const [lastNodeId, setLastNodeId] = useState(null);
     const [promptId, setPromptId] = useState(null);
     const [loadingHistory, setLoadingHistory] = useState(false)
-    const env = useEnv();
+    const config = Config();
 
     useEffect(()=> {
         const fetchData = async (id) =>{
@@ -46,7 +46,7 @@ export default function AppDetails({appId, client_id}) {
     useEffect( ()=> {
         console.log("Start to call web socket to get image, client_id: ", client_id)
         // create webSocket
-        const address = env.ComfyUI_BASE_ADDRESS.replace("https", "wss");
+        const address = config.comfyUIBaseAddress.replace("https", "wss");
         console.log(`socket address: ${address}`);
         const options = {
             maxReconnectionDelay: 20000,
@@ -84,8 +84,8 @@ export default function AppDetails({appId, client_id}) {
                         const subfolder = videos[i]['subfolder']
                         const rand = Math.random();
                         const path = `/viewvideo?filename=${filename}&type=output&subfolder=${subfolder}&rand=${rand}`;
-                        console.log("Got video path: ", env.ComfyUI_BASE_ADDRESS + path);
-                        setResultVideo(env.ComfyUI_BASE_ADDRESS + path);
+                        console.log("Got video path: ", config.comfyUIBaseAddress + path);
+                        setResultVideo(config.comfyUIBaseAddress + path);
                         setSrcImage(null);
                     }
                 }else if ('images' in data['data']['output']) {
@@ -95,8 +95,8 @@ export default function AppDetails({appId, client_id}) {
                         const subfolder = images[i]['subfolder']
                         const rand = Math.random();
                         const path = `/view?filename=${filename}&type=output&subfolder=${subfolder}&rand=${rand}`;
-                        console.log("image path: ", env.ComfyUI_BASE_ADDRESS + path);
-                        setSrcImage(env.ComfyUI_BASE_ADDRESS + path);
+                        console.log("image path: ", config.comfyUIBaseAddress + path);
+                        setSrcImage(config.comfyUIBaseAddress + path);
                         setResultVideo(null)
                     }
                 }
@@ -118,7 +118,8 @@ export default function AppDetails({appId, client_id}) {
         // clean up function
         return () => socket.close();
     }, []);
-
+    const data = new FormData();
+    data.set("comfyUIBaseAddress", config.comfyUIBaseAddress);
     useEffect(() => {
         const fetchHistory = async() => {
             if(loadingHistory){
@@ -126,7 +127,8 @@ export default function AppDetails({appId, client_id}) {
                     console.log("Start to get history info");
                     const response = await fetch('/api/comfyui/history/' + promptId,
                     {
-                        method: 'GET',
+                        method: 'POST',
+                        body: data,
                     })
 
                     const res = await response.json();

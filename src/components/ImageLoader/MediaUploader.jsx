@@ -6,9 +6,11 @@ import ReactPlayer from 'react-player';
 import styles from "./ImageLoaderForm.module.css";
 import Background from "/public/illustration.png"
 import Error from 'next/error';
+import Config from '../Config/config';
 
 const MediaUploader = ({ app, command, workflow, setWorkflow }) => {
     const [getFile, setFile] = useState();
+    const config = Config();
     
     async function onChange(event) {
         event.preventDefault()
@@ -29,6 +31,7 @@ const MediaUploader = ({ app, command, workflow, setWorkflow }) => {
 
         const data = new FormData();
         data.set('file', file);
+        data.set("comfyUIBaseAddress", config.comfyUIBaseAddress);
         try{
 
             const response = await fetch('/api/comfyui/upload/image',

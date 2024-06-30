@@ -3,14 +3,15 @@ import { NextResponse } from "next/server";
 export const POST = async (request) => {
     const data = await request.formData();
     const file = data.get('file');
+    const comfyUIBaseAddress = data.get("comfyUIBaseAddress");
     console.log("Start to upload image to comfyui, file: ", file);
 
     try {
         const body = new FormData();
         body.append("image", file);
         // upload image
-        console.log("request to url: ", `${process.env.ComfyUI_BASE_ADDRESS}/upload/image`)
-        const response = await fetch(`${process.env.ComfyUI_BASE_ADDRESS}/upload/image`, {
+        console.log("request to url: ", `${comfyUIBaseAddress}/upload/image`)
+        const response = await fetch(`${comfyUIBaseAddress}/upload/image`, {
             method: 'POST',
             body,
         });

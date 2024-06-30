@@ -49,6 +49,16 @@
   outline: none;
   color: #bbb;
   border: 3px solid #bbb;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: bold;
+}
+
+.button {
+  padding: 20px;
+  cursor: pointer;
+  background-color: #53c28b;
+  border: none;
+  border-radius: 5px;
+  width: max-content;
+  color: white;
 }
