@@ -21,8 +21,8 @@ We also support upload workflow to customize your app now, you can specify the p
 - [x] Customize App to support parameters
 - [x] Support vercel
 - [x] Start ComfyUI backend automatically
+- [x] Add settings in UI
 - [ ] Add limitation for free users
-- [ ] Add settings in UI
 - [ ] Adapt to mobile devices
 - [ ] Select model
 - [ ] Select styles
