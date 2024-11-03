@@ -42,6 +42,9 @@ Video to Video App
 Live demo:
 [EasyComfyUI: 更容易上手的ComfyUI-哔哩哔哩](https://b23.tv/NTaFyoV)
 
+# Try For Fun
+You can go to the website https://easy-comfyui.vercel.app/apps to have a try first, but we do not provide ComfyUI backend by default. You need set your comfyUI address in the settings first. It may fail if your ComfyUI does not have installed the required nodes. If you do not have the ComfyUI, you can ask me to give you an url for testing, the url may only work an hour, not sure about it.
+
 # Install
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
