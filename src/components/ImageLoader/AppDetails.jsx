@@ -163,41 +163,48 @@ export default function AppDetails({appId, client_id}) {
                 </div>
             </div>
             <div className={styles.content}>
-                {app.commands.map((command) => (
-                    command.type === "text" ? 
-                    (<div className={styles.item} key={command.id}>
-                        <p className={styles.desc}>
-                            {command.desc}
-                        </p>
-                        <PromptForm data={app} command = {command} client_id={client_id} workflow={workflow} setWorkflow={setWorkflow} setPromptId={setPromptId} setLoading={setLoading}/>
-                    </div>) :
-                    (<div className={styles.item} key={command.id}>
-                        <p className={styles.desc}>
-                            {command.desc}
-                        </p>
-                        <MediaUploader app={app} command = {command} workflow={workflow} setWorkflow={setWorkflow} />
-                    </div>)
-                ))}
+                <div className={styles.app}>
+                    {app.commands.map((command) => (
+                        command.type === "text" ? 
+                        (<div className={styles.item} key={command.id}>
+                            <p className={styles.desc}>
+                                {command.desc}
+                            </p>
+                            <PromptForm data={app} command = {command} client_id={client_id} workflow={workflow} setWorkflow={setWorkflow} setPromptId={setPromptId} setLoading={setLoading}/>
+                        </div>) :
+                        (<div className={styles.item} key={command.id}>
+                            <p className={styles.desc}>
+                                {command.desc}
+                            </p>
+                            <MediaUploader app={app} command = {command} workflow={workflow} setWorkflow={setWorkflow} />
+                        </div>)
+                    ))}
+                </div>
+                <div className={styles.result}>
+                    <div><p>Result</p></div>
+                    <div>
+                        {   loading && (<Image
+                                src={LoadingIcon}
+                                alt=""
+                                width={512}
+                                height={512}
+                                className={ styles.loading }
+                            />)
+                        }
+                        {   !loading && srcImage && (<Image
+                                src={srcImage}
+                                alt=""
+                                width={512}
+                                height={512}
+                                className={styles.image}
+                            />)
+                        }
+                        {
+                            !loading && resultVideo && (<ReactPlayer url={resultVideo} controls={true}/>)
+                        }
+                    </div>
+                </div>
             </div>
-                {   loading && (<Image
-                        src={LoadingIcon}
-                        alt=""
-                        width={512}
-                        height={512}
-                        className={ styles.loading }
-                    />)
-                }
-                {   !loading && srcImage && (<Image
-                        src={srcImage}
-                        alt=""
-                        width={512}
-                        height={512}
-                        className={styles.image}
-                    />)
-                }
-                {
-                    !loading && resultVideo && (<ReactPlayer url={resultVideo} controls={true}/>)
-                }
         </div>
     );
 }

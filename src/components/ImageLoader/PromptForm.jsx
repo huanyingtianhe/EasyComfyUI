@@ -37,15 +37,19 @@ const PromptForm = ({ data, command, client_id, workflow, setWorkflow, setPrompt
 
     return (
         <form onSubmit = {onSubmit} className={styles.promptForm}>
-            <input
-                name = "prompt"
-                type = "text"
-                className={styles.prompt}
-                placeholder="Prompt"
-            ></input>
-            <button className={styles.generate}>
-                Generate
-            </button>
+            <div>
+                <input
+                    name = "prompt"
+                    type = "text"
+                    className={styles.prompt}
+                    placeholder="Prompt"
+                ></input>
+            </div>
+            <div>
+                <button className={styles.generate}>
+                    Generate
+                </button>
+            </div>
         </form>
     );
 };

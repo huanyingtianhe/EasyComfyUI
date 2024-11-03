@@ -36,44 +36,62 @@
   font-size: 20px;
   font-weight: 300;
   text-align: justify;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+.app {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid #fbf7f7;
+  border-radius: 5px;
+}
+
+.result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #e8e2e0;
+  border-radius: 5px;
 }
 
 .item{
   font-size: 18px;
   font-weight: 300;
-  margin-top: 5px;
-  margin-bottom: 2px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  width: 95%;
 }
 
 .promptForm {
-  display: flex;
-  align-items: stretch;
+  display: grid;
+  grid-template-columns: 1fr;
   margin-top: 5px;
-  width: 1024px;
-  position: relative;
+  width: 100%;
+  justify-content: center;
 }
 
 .prompt{
   padding: 20px;
   background-color: transparent;
-  border: 2px solid #53c28b;
+  border: 1px solid #e7e7e7;
   color:#e4eae6;
   border-radius: 5px;
   font-size: 18px;
-  flex: 14;
-  width: 80%;
+  width: 100%;
 }
 
 .generate {
-  border: 2px solid #53c28b;
+  margin-top: 5px;
+  border: 1px solid #fbf7f7;
   border-radius: 5px;
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 16px;
+  font-weight: normal;
   color: #fbf7f7;
-  background-color: #53c28b;
-  flex: 1;
+  background-color: #cbdbd328;
+  width: 100%;
 }
 
 .image {
@@ -100,27 +118,28 @@
 }
 
 .chooseinput{
-  border: 2px solid #53c28b;
-  border-radius: 5px;
+  border: 1px solid #e7e7e7;
+  border-radius: 3px;
   color: #fbf7f7;
   background-color: #2f121a;
   flex: 6;
 }
 
 .chooseupload {
-  border: 2px solid #53c28b;
-  border-radius: 5px;
+  border: 1px solid #e7e7e7;
+  border-radius: 3px;
   font-size: 12px;
   color: #fbf7f7;
-  background-color: #53c28b;
+  background-color: #e7e7e7;
   flex: 1;
 }
 
 .uploadblock{
-  border: 2px solid #53c28b;
-  border-radius: 5px;
+  border: 1px solid #e7e7e7;
+  border-radius: 3px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }

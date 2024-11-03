@@ -65,9 +65,9 @@ const MediaUploader = ({ app, command, workflow, setWorkflow }) => {
                     !getFile && (
                         <Image
                             src={Background}
-                            width={512}
-                            height={512}
                             alt = "Uploading image"
+                            width={256}
+                            height={256}
                         />
                     )
                 }
