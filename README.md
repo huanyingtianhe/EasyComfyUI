@@ -34,6 +34,10 @@ Home Page:
 ![home](https://github.com/huanyingtianhe/EasyComfyUI/assets/5997003/aa4ec2a8-bd96-44d9-8819-c2f7b3337454)
 Apps Page:
 ![apps](https://github.com/huanyingtianhe/EasyComfyUI/assets/5997003/37bc33e9-96fb-436d-9c2f-da10fef03cb1)
+Text to Image App:
+![Text2Image](https://github.com/user-attachments/assets/686138c4-a634-4e2f-b2f9-3449239350e1)
+Video to Video App
+![Video2Video](https://github.com/user-attachments/assets/7220a1b0-3378-4aab-8895-e9ea8166c0a8)
 
 Live demo:
 [EasyComfyUI: 更容易上手的ComfyUI-哔哩哔哩](https://b23.tv/NTaFyoV)
